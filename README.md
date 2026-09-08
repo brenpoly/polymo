@@ -7,6 +7,11 @@ to it, and it answers out of its own speaker. It gets hungry, it gets bored, it
 grows up, and it dies if you neglect it — and the thing that makes it sick is
 your screen time.
 
+[![I Built a Virtual Pet that Dies when you Doomscroll](https://img.youtube.com/vi/Tyy3dYI-5ds/maxresdefault.jpg)](https://www.youtube.com/watch?v=Tyy3dYI-5ds)
+
+*I Built a Virtual Pet that Dies when you Doomscroll* — the build, and what it
+does. Click through to YouTube.
+
 Everything it says is generated on your phone, on-device. There is no account
 and no server.
 
