@@ -62,12 +62,25 @@ phone again, the pet goes on living — it just goes quiet.
 Both V1 and V2 board revisions are supported; the panel driver (SH8601 or
 CO5300) is detected at runtime.
 
-## Design
+## The two documents
 
-[`DESIGN.md`](DESIGN.md) is the product and UX source of truth — the state
-model both surfaces render, why the allowance is per-sitting rather than per-day,
-why the score is called *satiety* and not *hunger*, and the component rules. Code
-comments cite it by section number.
+Both are cited from the source, by section number, so a comment explaining *why*
+a thing is the way it is can point at the argument instead of restating it.
+
+**[`DESIGN.md`](DESIGN.md) — product and UX.** The state model both surfaces
+render, the flows, and the decisions with their reasoning: why the allowance is
+per-sitting rather than per-day (a daily total never falls, so a pet made ill at
+11am could not recover until midnight), why the score is called *satiety* rather
+than *hunger* (so that `if (hunger > 3)` cannot read correctly and mean the
+opposite), and the component rules the UI is built from.
+
+**[`CLAUDE.md`](CLAUDE.md) — how to work on this.** Written as instructions for
+[Claude Code](https://claude.com/claude-code), which is what it is named after,
+and it doubles as the conventions file: the build commands and the traps in them,
+the rule that faces and personas are *generated* and must not be hand-edited, and
+the practice that every test here was checked by breaking the code it covers and
+confirming it fails. Read it before changing anything, whatever you are using to
+change it.
 
 ## Repository layout
 
@@ -77,6 +90,9 @@ android/        the app — BLE, Whisper, llama.cpp, Piper, screen-time tracking
 design-system/  design tokens, plus the pet's faces and personas (source of truth)
 tools/          generators that turn faces and personas into firmware and app code
 shared/         the wire protocol header shared by both sides
+licences/       full texts for the bundled fonts and for GPL-3.0
+DESIGN.md       product and UX decisions, cited from the source by section
+CLAUDE.md       build commands, conventions, and the traps worth knowing
 ```
 
 The firmware and the app share a protocol (`pet-esp32/main/pet_proto.h` and
