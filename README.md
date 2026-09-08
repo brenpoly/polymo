@@ -1,11 +1,18 @@
 # PolyMO
 
-A physical digital pet you keep alive.
+**A virtual pet that dies when you doomscroll.**
 
-PolyMO is a palm-sized creature with a bright AMOLED face. You tap it, you talk
-to it, and it answers out of its own speaker. It gets hungry, it gets bored, it
-grows up, and it dies if you neglect it — and the thing that makes it sick is
-your screen time.
+It is a real object: a palm-sized creature with a bright AMOLED face that sits
+on your desk and blinks at you. It gets hungry, it gets bored, and it grows up.
+Spend too long in an app it is watching and it falls ill — and it stays ill
+until you put the phone down.
+
+Illness is not instant death. A sick pet drains faster than a well one, and a
+pet left empty for long enough dies for good, with a reset you have to ask for.
+That is the loop: your screen time is the pet's environment, not a setting
+inside it.
+
+You talk to it out loud, and it answers out of its own speaker.
 
 [![I Built a Virtual Pet that Dies when you Doomscroll](https://img.youtube.com/vi/Tyy3dYI-5ds/maxresdefault.jpg)](https://www.youtube.com/watch?v=Tyy3dYI-5ds)
 
