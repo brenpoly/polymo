@@ -23,7 +23,6 @@ set(WHISPER_CPP_DIR "${SUBMODULES_DIR}/whisper.cpp")
 set(PIPER_DIR "${SUBMODULES_DIR}/piper")
 set(OPUS_DIR "${DEPS_DIR}/opus")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
-set(ESPEAK_NG_DIR "${DEPS_DIR}/espeak-ng")
 
 # ==============================================================================
 # llama.cpp — build from source

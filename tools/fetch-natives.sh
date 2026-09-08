@@ -9,11 +9,15 @@
 # WHAT THIS SCRIPT DOES NOT DO, stated first because a setup script that
 # overstates itself wastes more time than one that does nothing:
 #
-#   * It fetches SOURCES only. Two prebuilt shared libraries still have to be
-#     obtained separately and placed in android/app/src/main/jniLibs/arm64-v8a/:
-#     libonnxruntime.so (from an ONNX Runtime Android release) and
-#     libespeak-ng.so (built from the espeak-ng source this script fetches).
-#     android/app/src/main/cpp/CMakeLists.txt imports both as SHARED IMPORTED.
+#   * It fetches SOURCES only. Three things are still missing afterwards, and
+#     running this script end to end on a fresh clone is how that list was
+#     found -- it was two until then:
+#       - android/app/src/main/jniLibs/arm64-v8a/libespeak-ng.so, built from
+#         the espeak-ng source this script fetches
+#       - android/app/src/main/jniLibs/arm64-v8a/libonnxruntime.so, and
+#       - deps/onnxruntime/include, its headers. Both come out of the same
+#         ONNX Runtime Android release; CMakeLists.txt imports the .so as
+#         SHARED IMPORTED and puts the include dir on the include path.
 #
 #   * Three dependencies -- fmt, spdlog and piper-phonemize -- have NO RECORDED
 #     VERSION. They were obtained without leaving a tag or commit behind. This
