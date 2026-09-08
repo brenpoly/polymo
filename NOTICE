@@ -48,16 +48,38 @@ This is a statement of the licences involved, not legal advice.
 Third-party components
 --------------------------------------------------------------------------
 
-Linked into the Android native library:
+Linked into the Android native library. The commit is given where it is known,
+because "the source corresponding to this binary" is not a claim that can be
+made without one -- see the note below the table.
 
   espeak-ng          GPL-3.0-or-later   https://github.com/espeak-ng/espeak-ng
-                     (text: licences/GPL-3.0.txt)
+                     commit fbe4b3764285 (1.52.0-292-gfbe4b376)
+                     licence text: licences/GPL-3.0.txt
   llama.cpp          MIT                https://github.com/ggerganov/llama.cpp
+                     commit bec4772f6a25 (b9905-8)
   whisper.cpp        MIT                https://github.com/ggerganov/whisper.cpp
+                     commit 6fc7c33b4c3a (v1.9.1-81)
   Piper              MIT                https://github.com/rhasspy/piper
+                     commit 73c04d81d559 (2023.11.14-2-42)
+  Opus               BSD-3-Clause       https://github.com/xiph/opus
+                     commit 3da9f7a6db1c (v1.6.1-50)
   piper-phonemize    MIT                https://github.com/rhasspy/piper-phonemize
-  Opus               BSD-3-Clause       https://opus-codec.org
+                     VERSION NOT RECORDED
+  fmt                MIT                https://github.com/fmtlib/fmt
+                     VERSION NOT RECORDED
+  spdlog             MIT                https://github.com/gabime/spdlog
+                     VERSION NOT RECORDED
   ONNX Runtime       MIT                https://github.com/microsoft/onnxruntime
+                     prebuilt .so, ORT_API_VERSION 27; release not recorded
+
+The three marked NOT RECORDED were obtained without leaving a version behind --
+no tag, no commit, no manifest. They are all permissively licensed, so nothing
+turns on it legally, but a build cannot be reproduced exactly until they are
+pinned, and that is a known gap rather than an oversight nobody noticed.
+
+The espeak-ng commit is the one that carries an obligation: GPL-3.0 requires
+the corresponding source of the linked library be available to anyone who
+receives the binary, and the commit above is what makes that identifiable.
 
 Used by the ESP32-S3 firmware:
 

@@ -131,6 +131,22 @@ JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
   ./gradlew assembleDebug
 ```
 
+#### Native dependencies
+
+The app links llama.cpp, whisper.cpp, Piper, Opus and espeak-ng. Those are not
+in this repository — about 1.3 GB of unmodified third-party source, several of
+them git clones whose own `.git` would become a broken gitlink here. What is
+kept instead is the exact commit each was built from, in [NOTICE](NOTICE), so a
+build can be reproduced rather than approximated:
+
+```bash
+tools/fetch-natives.sh
+```
+
+Read its header before running it. It fetches sources only — two prebuilt
+shared libraries still have to be placed by hand — and three dependencies have
+no recorded version, which NOTICE marks rather than hides.
+
 Tests — 512 of them, no device required:
 
 ```bash
