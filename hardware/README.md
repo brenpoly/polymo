@@ -7,6 +7,11 @@ The two shells shown in the video. Both are printable as-is.
 | `PolyMO_BMO.stl` | 169,102 |
 | `PolyMO_C0F-E.stl` | 138,560 |
 
+**The zero in `C0F-E` is deliberate — do not "fix" it.** The source CAD spells
+the same shape `COF-E`, with the letter O, so the two look like a typo sitting
+next to each other and the STL looks like the wrong one. It is not. The name is
+stylised, in the way a robot's name is.
+
 ## What goes inside
 
 A **Waveshare ESP32-S3 Touch-AMOLED-1.8** board and a LiPo cell on the board's
