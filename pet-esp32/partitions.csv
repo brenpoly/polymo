@@ -1,0 +1,23 @@
+# DigitalPet — custom partition table (16 MB flash).
+#
+# Replaces the ESP-IDF default single-app table, which gave a 1 MB factory
+# partition and left ~14 MB of the chip unused. The app was already at ~850 KB
+# (83% full) with only the display + BLE in it; audio (M4/M5) and animation
+# assets would not have fit.
+#
+#  - Two 3 MB OTA app slots: ~3.5x the headroom, and over-the-air updates
+#    become possible later without a second, migration-y layout change.
+#    (No factory partition: with otadata blank the bootloader runs ota_0, which
+#    is what `idf.py flash` writes.)
+#  - ~9.8 MB `assets` partition for pet artwork — sprite/frame sequences can be
+#    dropped there and swapped without reflashing the firmware.
+#
+# App partitions must start on a 64 KB boundary.
+#
+# Name,     Type, SubType, Offset,   Size,     Flags
+nvs,        data, nvs,     0x9000,   0x6000,
+otadata,    data, ota,     0xf000,   0x2000,
+phy_init,   data, phy,     0x11000,  0x1000,
+ota_0,      app,  ota_0,   0x20000,  0x300000,
+ota_1,      app,  ota_1,   0x320000, 0x300000,
+assets,     data, spiffs,  0x620000, 0x9E0000,

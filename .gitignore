@@ -1,0 +1,72 @@
+# DigitalPet — what to keep out of version control.
+#
+# The working tree is ~3.5 GB, but almost all of that is regenerable or
+# third-party. What is worth tracking is the hand-written source and docs:
+# android/app/src, pet-esp32/main, the archived firmware/ sources, and the
+# handoff/design documents.
+
+# --- build output (regenerable) ---------------------------------------------
+build/
+.gradle/
+.cxx/
+*.o
+*.obj
+
+# ESP-IDF: sdkconfig is generated from sdkconfig.defaults, which IS tracked.
+# managed_components/ is fetched by the component manager; the .lock file
+# tracked below pins the versions, so the fetch is reproducible.
+pet-esp32/sdkconfig
+pet-esp32/sdkconfig.old
+pet-esp32/managed_components/
+# NOTE: dependencies.lock is deliberately TRACKED — it pins exact ESP-IDF
+# component versions + hashes (LVGL, the Waveshare BSP). The firmware works
+# around specific LVGL behaviour, so a fresh clone must resolve the same
+# versions rather than whatever is newest.
+
+# --- vendored third-party sources (each is its own git clone) ---------------
+# Not submodules on purpose — re-clone these if you need to rebuild natives.
+/llama.cpp/
+/whisper.cpp/
+/piper/
+/deps/
+android/app/src/main/cpp/deps/
+
+# --- large binaries and ML models (re-downloadable) -------------------------
+*.jar
+*.zip
+*.tar.bz2
+*.so
+*.a
+*.gguf
+*.onnx
+*.bin
+# The wrapper jar must ship: without it a fresh clone cannot run ./gradlew.
+# This negation was previously written un-prefixed, which silently never
+# matched -- an anchored pattern is relative to this file, and the jar is
+# under android/.
+!android/gradle/wrapper/gradle-wrapper.jar
+
+# Nothing is bundled: all three models — the LLM, the Whisper .bin and the Piper
+# voice — are fetched by the user and imported through the system picker. An
+# earlier build shipped ggml-tiny.en.bin in assets, which cost ~75 MB in the APK
+# AND ~75 MB unpacked, and made the ears the one faculty nobody chose.
+
+# --- signing ----------------------------------------------------------------
+# The release keystore and its passwords. Losing the .jks means never being able
+# to update the app under the same Play listing again, so keep a backup that is
+# not this repo — and never commit either file.
+android/app/keystore.properties
+*.jks
+*.keystore
+
+# --- machine-local / transient ----------------------------------------------
+local.properties
+# tools/ is plain scripts run in place; the interpreter's bytecode cache was
+# tracked once by accident and is regenerated on every run.
+__pycache__/
+*.pyc
+logcat.txt
+*.log
+.DS_Store
+.idea/
+.claude/settings.local.json

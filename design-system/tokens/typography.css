@@ -1,0 +1,68 @@
+/* Material's own scale from ui/theme/Type.kt. The SIZES and the WEIGHTS are the shipped
+   ones — the only thing this changes is the FAMILY, which is what DESIGN.md §4 asked for
+   and never got.
+
+   TWO FACES, SPLIT BY JOB:
+   --font-display  Baloo 2   — anything that names something: the app title, screen
+                               titles, the care-card headline, a slot's name. Rounded,
+                               heavy-set, and the reason the product reads as playful
+                               rather than as a settings app with a pet in it.
+   --font-sans     Quicksand — everything that is read rather than glanced at: body copy,
+                               subtitles, meter labels, filenames, chips. Geometric and
+                               round-terminalled, so it agrees with Baloo 2 without
+                               competing with it.
+
+   The split is by ROLE, not by size. A 13px slot title is display; a 16px settings
+   subtitle is body. Getting this backwards is the one way to make the pairing look
+   like an accident.
+
+   NEITHER FACE HAS AN ITALIC. Baloo 2 is 400–800, Quicksand 300–700, both upright only.
+   Emphasis is weight or colour, never a slant — a synthesised oblique on a rounded face
+   looks like a rendering fault.
+
+   ONE WEIGHT DEPARTURE, AND ONLY ON QUICKSAND. Its 400 is visibly lighter than Roboto's
+   at the same size, so body runs at 500 and labels at 600 where the source ran a step
+   lighter. That preserves apparent weight; it is not a change of mind. Baloo 2 keeps
+   Type.kt's weights exactly. */
+
+:root {
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-sans: Quicksand, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* The pet's own screen. LVGL ships Montserrat and there is no font pipeline
+     on the device, so this is not a choice — and it is why the pet's own text
+     will never match the phone's. */
+  --font-pet: Montserrat, var(--font-sans);
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Display face — Type.kt's weights, unchanged. */
+  --display-large: 700 57px/64px var(--font-display);
+  --display-medium: 400 45px/52px var(--font-display);
+  --display-small: 400 36px/44px var(--font-display);
+  /* SemiBold, not Material's Normal. It is the app title and it was chosen.
+     CORRECTED 2026-08-09: this read 500, which is Medium and contradicted both
+     this comment and DESIGN-SYSTEM.md §3. Type.kt has always had SemiBold.
+     Found by TokenSyncTest on its first run. */
+  --headline-large: 600 32px/40px var(--font-display);
+  --headline-medium: 400 28px/36px var(--font-display);
+  --headline-small: 400 24px/32px var(--font-display);
+  --title-large: 400 22px/28px var(--font-display);
+  --title-medium: 500 16px/24px var(--font-display);
+  --title-small: 500 14px/20px var(--font-display);
+
+  /* Body face — one step up, to hold Roboto's apparent weight. */
+  --body-large: 500 16px/24px var(--font-sans);
+  --body-medium: 500 14px/20px var(--font-sans);
+  --body-small: 500 12px/16px var(--font-sans);
+  --label-large: 600 14px/20px var(--font-sans);
+  --label-medium: 600 12px/16px var(--font-sans);
+  --label-small: 600 11px/16px var(--font-sans);
+
+  /* Outside the scale on purpose: console output that reflows is unreadable, and
+     neither face is monospaced. */
+  --console: 400 12px/16px var(--font-mono);
+}

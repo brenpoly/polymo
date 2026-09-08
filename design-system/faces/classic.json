@@ -1,0 +1,140 @@
+{
+  "id": "classic",
+  "name": "Classic",
+  "description": "The face the pet has always worn. Gold on black, pill eyes. Its geometry is the firmware's own apply_mood() as it stood at protocol v8, with one deliberate change: happy now curves up and sad curves down, because a face set has to mean what it says.",
+  "persona": "classic",
+  "colors": {
+    "eye": "#F5A623",
+    "mouth": "#F5A623",
+    "panel": "#000000",
+    "control": "#14202A",
+    "text": "#E8E6F0"
+  },
+  "layout": {
+    "eyeOffsetX": 64,
+    "eyeOffsetY": -56,
+    "mouthOffsetY": 40,
+    "eyeRadius": -1,
+    "mouthCap": "round"
+  },
+  "stageScale": {
+    "egg": 55,
+    "child": 70,
+    "teen": 85,
+    "adult": 100
+  },
+  "faces": {
+    "neutral": {
+      "eyeW": 74,
+      "eyeH": 96,
+      "mouthW": 120,
+      "mouthThickness": 16,
+      "mouthBulge": 0
+    },
+    "happy": {
+      "eyeW": 74,
+      "eyeH": 14,
+      "eyeBulge": -16,
+      "gazeY": -3,
+      "mouthW": 150,
+      "mouthThickness": 22,
+      "mouthBulge": 20,
+      "motion": {
+        "blinkMs": 6200,
+        "breatheFrom": -5,
+        "breatheMs": 2300,
+        "breatheTo": 8
+      }
+    },
+    "sleepy": {
+      "eyeW": 74,
+      "eyeH": 16,
+      "gazeY": 5,
+      "mouthW": 56,
+      "mouthThickness": 10,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 9000,
+        "breatheFrom": -3,
+        "breatheMs": 3200,
+        "breatheTo": 5
+      }
+    },
+    "surprised": {
+      "eyeW": 88,
+      "eyeH": 112,
+      "gazeY": -2,
+      "mouthW": 52,
+      "mouthThickness": 52,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 8000,
+        "breatheFrom": -1,
+        "breatheMs": 1200,
+        "breatheTo": 2
+      }
+    },
+    "sad": {
+      "eyeW": 74,
+      "eyeH": 62,
+      "gazeY": 7,
+      "mouthW": 80,
+      "mouthThickness": 12,
+      "mouthBulge": -8,
+      "motion": {
+        "blinkMs": 7000,
+        "breatheFrom": -3,
+        "breatheMs": 2600,
+        "breatheTo": 4
+      }
+    },
+    "sick": {
+      "eyeW": 76,
+      "eyeH": 10,
+      "rightEyeW": 72,
+      "rightEyeH": 11,
+      "eyeShape": "spiral",
+      "spiralTurns": 2,
+      "gazeY": 4,
+      "mouthW": 40,
+      "mouthThickness": 40,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 3200,
+        "breatheFrom": -2,
+        "breatheMs": 900,
+        "breatheTo": 3,
+        "spinMs": 2600
+      }
+    },
+    "dead": {
+      "eyeW": 74,
+      "eyeH": 8,
+      "mouthW": 0,
+      "mouthThickness": 0,
+      "mouthBulge": 0,
+      "motion": null
+    },
+    "asleep": {
+      "eyeW": 74,
+      "eyeH": 8,
+      "mouthW": 56,
+      "mouthThickness": 10,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 0,
+        "breatheFrom": -2,
+        "breatheMs": 3600,
+        "breatheTo": 4
+      }
+    }
+  },
+  "motion": {
+    "blinkMs": 5400,
+    "shutMs": 300,
+    "breatheMs": 1900,
+    "breatheFrom": -4,
+    "breatheTo": 6,
+    "spinMs": 0
+  }
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The foreground notification — Claude Design's own specimen, in
+    `Digital Pet Design System.dc.html` under "Foreground notification".
+
+    **On screen permanently while the pet is on, so for most of the day it is the
+    only surface anyone looks at.** That is the design system's own sentence
+    about it, and it is why the avatar being wrong mattered: this showed a white
+    robot with an antenna while every other surface showed the pet.
+
+    A 48dp avatar, a title and a subtitle. **A third line risks clipping in the
+    collapsed shade**, so there are two and there is no room to add one without
+    the design saying how.
+
+    THE ROW IS NOT 64dp, AND ASKING FOR 64 COST US 8 OF THEM.
+
+    The design system draws a 64dp row and this file used to declare one. The
+    platform does not grant it: under `DecoratedCustomViewStyle` the collapsed
+    headerless row gives a custom view exactly **48dp**, measured on the device
+    as `notification_main_column` at 108px on a 360dpi screen.
+
+    So a 64dp LinearLayout with `gravity="center_vertical"` laid its children
+    out against 144px inside a 108px box: everything was pushed **8dp down**,
+    and the bottom 8dp of the 48dp avatar was **clipped off** — a flat-bottomed
+    badge, and a gap above the content that reads as too much top padding.
+    Both reported symptoms, one cause, and neither is visible in a build.
+
+    `wrap_content` makes the row exactly as tall as the avatar, so it fits the
+    granted height precisely and there is no centring offset to push anything
+    anywhere. **Do not put a fixed height back.** If the design's 64dp matters,
+    it is a number the platform owns here, not this file.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!--
+        THE PET'S FACE, AND IT DOES NOT ANIMATE.
+
+        This was a `ViewFlipper` alternating two frames every 500 ms. The frames
+        were a robot; the rhythm was nothing.
+
+        **500 ms cannot express the pet's blink and no uniform interval can.**
+        The blink is a 5400 ms cycle with the eyes shut for about 300 of it —
+        the firmware's own number, used on the phone so the two surfaces agree
+        about what the pet is doing (design system §4, Motion). A `ViewFlipper`
+        has one `flipInterval`, so it can only spend half its life blinking.
+        `AnimationDrawable` allows per-frame durations and does not reliably run
+        inside a notification.
+
+        So it is still, which is also what the design's three specimens show —
+        every one of them draws open eyes. §4's motion rule is that nothing
+        animates except the blink and the typing dots; an invented rhythm here
+        would be a third.
+    -->
+    <ImageView
+        android:id="@+id/notification_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/pet_face_classic_neutral"
+        android:scaleType="fitCenter"
+        android:contentDescription="@null" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Title" />
+
+        <TextView
+            android:id="@+id/notification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Line2" />
+
+    </LinearLayout>
+
+</LinearLayout>

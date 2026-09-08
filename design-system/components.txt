@@ -1,0 +1,44 @@
+# The component roster: what this system draws, what the app builds, and the
+# three places those deliberately differ.
+#
+# Format:  <area>/<Name>  <both|design-only|code-only>  [reason, required unless "both"]
+#
+# `both` means components/<area>/<Name>.jsx here AND
+# android/…/ui/components/<area>/<Name>.kt in the app. The app's
+# `ComponentRosterTest` reads a vendored copy of this file and fails on anything
+# it does not expect — a component designed and never built, or built and never
+# designed, or renamed on one side.
+#
+# WHY IT LIVES HERE. Same reason as strings.txt: a roster kept on the code's side
+# can only check the code against itself. Moved 2026-08-09.
+#
+# THE POINT OF THE TWO EXCEPTION KINDS. A roster that only listed matches would
+# have to be edited into a lie the first time a legitimate asymmetry appeared,
+# and then it would stop being read. Naming them costs one line each and keeps
+# the check honest — an unexplained absence is a failure, an explained one is a
+# decision.
+
+chat/MessageBubble       both
+chat/MessageInputBar     both
+chat/SuggestionChip      both
+chat/TypingIndicator     both
+
+core/BadgePill           both
+core/Card                both
+core/SearchField         both
+core/StatusChip          both
+core/StepButton          both
+core/PetButton           code-only    Three button roles — primary, secondary, low-emphasis — with the 48dp touch minimum stated once. The design system names no general button, so every screen was reaching for Material directly and choosing for itself; twenty call sites had four answers between them and all but two were 8dp under DESIGN.md 7.5's load-bearing minimum. Owes the round trip: this is a card the system should have.
+core/Icon                design-only  A wrapper over the icon font, for the web preview. The app uses M3's own Icon; DESIGN-SYSTEM.md 5a says there are no custom icons and none are needed.
+
+pet/CareCard             both
+pet/Meter                both
+pet/PetPanel             both
+pet/PetHeader            code-only    Drawn inside ui_kits/phone/MainSurface.jsx rather than as a card of its own. Real component in the app; the design system renders it in situ.
+
+settings/AlternativeRow  both
+settings/SettingsRow     both
+settings/SlotCard        both
+settings/TrackedAppCard  both
+settings/UsageBar        both
+settings/SettingsScaffold code-only   Drawn inside ui_kits/phone/SettingsScaffold.jsx as a screen frame rather than a component card. Same situation as PetHeader.

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!-- neverForLocation: we scan only to find our own pet device, never to derive
+         the user's location. With minSdk 31 this lets BLE scanning work WITHOUT
+         ACCESS_FINE_LOCATION (previously declared here), so the user is not asked
+         for a location permission just to connect the pet. -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <!-- So the pet comes back after a reboot instead of quietly ageing and
+         decaying with the phone sitting next to it. The receiver does nothing
+         at all unless a pet has actually been paired. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- connectedDevice, not specialUse. This service exists BECAUSE a pet is
+         connected — PetBleRepository starts it on connect and this service only
+         ever drops the link — so "interacting with an external device" is a
+         literal description rather than a justification. Google treats
+         specialUse as a last resort and reviews the subtype string; a standard
+         type that is honestly the right one avoids that conversation entirely.
+         The BLUETOOTH_* permissions above are what this type requires. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!--
+        USB host, for identifying (and one day flashing) the pet over a cable.
+        A FEATURE rather than a permission, and `required=false` on purpose: the
+        pet is a BLE device and everything except the first flash works without
+        a cable, so a phone with no OTG must not be excluded from the store
+        listing over a recovery path.
+    -->
+    <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <!--
+        PACKAGE VISIBILITY, AND WHY THIS IS NOT QUERY_ALL_PACKAGES ANY MORE.
+
+        It was, and that was a Play restricted permission asking for far more
+        than this app does with it. Every use is the same one: turn a package
+        name that UsageStats or the notification listener has ALREADY given us
+        into something a person recognises. And the app picker in Screen time
+        filters `getInstalledApplications` down to packages with a launch intent
+        anyway — so the code was already asking for exactly this set, while the
+        manifest asked for every package on the device.
+
+        A package outside this filter (a service with no launcher icon posting a
+        notification) resolves to its package id instead of a label. All three
+        call sites already fall back that way on purpose: ugly and honest beats
+        dropping a row the user can see the effects of.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".DigitalPetApp"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DigitalPet">
+
+        <!--
+            windowSoftInputMode is DECLARED, not inherited. It was the platform
+            default and the main surface depended on it without saying so: there
+            is no imePadding anywhere on that screen, because the window
+            resizing is what lifts the input bar AND the chat sheet clear of the
+            keyboard together. Doing both charged for the keyboard twice and
+            threw the input bar most of the way up the screen. See PetHomeScreen.
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.DigitalPet">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Reconnects after a phone restart. exported=true is required: the
+
+             sender is the system, not this app. -->
+
+        <receiver
+
+            android:name=".service.BootReceiver"
+
+            android:enabled="true"
+
+            android:exported="true">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+            </intent-filter>
+
+        </receiver>
+
+
+        <service
+            android:name=".service.PetForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
+
+        <service
+            android:name=".service.PetNotificationListener"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

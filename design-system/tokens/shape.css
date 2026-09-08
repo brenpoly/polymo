@@ -1,0 +1,17 @@
+/* CustomShapes in Theme.kt is small 8 / medium 16 / large 24. The rest are the
+   radii the screens actually draw. */
+
+:root {
+  --radius-small: 8px;
+  --radius-medium: 16px;
+  --radius-large: 24px;
+
+  --radius-bubble: 20px;
+  --radius-bubble-tail: 6px;   /* the asymmetric corner that marks the speaker */
+  --radius-row: 14px;
+  --radius-card: 20px;         /* settings cards, tracked-app rows */
+  --radius-care-card: 24px;
+  --radius-sheet-top: 30px;
+  --radius-pet-panel: 34px;
+  --radius-pill: 999px;        /* chips, steppers, buttons */
+}

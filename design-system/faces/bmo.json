@@ -1,0 +1,140 @@
+{
+  "id": "bmo",
+  "name": "Little Computer",
+  "description": "A tribute to the small game-console character from Adventure Time: dark features on a pale mint screen, round wide-set eyes and a tiny mouth. The one set that inverts the palette \u2014 everything else is light on black, and this is black on light, which is the whole reason it reads as a different machine rather than a recolour.",
+  "persona": "bmo",
+  "colors": {
+    "eye": "#14332B",
+    "mouth": "#14332B",
+    "panel": "#AEDCC8",
+    "control": "#E8F5EE",
+    "text": "#14332B"
+  },
+  "layout": {
+    "eyeOffsetX": 64,
+    "eyeOffsetY": -34,
+    "mouthOffsetY": 46,
+    "eyeRadius": -1,
+    "mouthCap": "round"
+  },
+  "stageScale": {
+    "egg": 55,
+    "child": 70,
+    "teen": 85,
+    "adult": 100
+  },
+  "motion": {
+    "blinkMs": 4200,
+    "shutMs": 260,
+    "breatheMs": 1700,
+    "breatheFrom": -3,
+    "breatheTo": 5,
+    "spinMs": 0
+  },
+  "faces": {
+    "neutral": {
+      "eyeW": 38,
+      "eyeH": 38,
+      "mouthW": 44,
+      "mouthThickness": 10,
+      "mouthBulge": 0
+    },
+    "happy": {
+      "eyeW": 38,
+      "eyeH": 9,
+      "eyeBulge": -10,
+      "gazeY": -3,
+      "mouthW": 74,
+      "mouthThickness": 10,
+      "mouthBulge": 16,
+      "motion": {
+        "blinkMs": 5200,
+        "breatheMs": 2000,
+        "breatheFrom": -4,
+        "breatheTo": 7
+      }
+    },
+    "sleepy": {
+      "eyeW": 38,
+      "eyeH": 10,
+      "gazeY": 5,
+      "mouthW": 30,
+      "mouthThickness": 8,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 8000,
+        "breatheMs": 3000,
+        "breatheFrom": -2,
+        "breatheTo": 4
+      }
+    },
+    "surprised": {
+      "eyeW": 48,
+      "eyeH": 54,
+      "gazeY": -2,
+      "mouthW": 34,
+      "mouthThickness": 34,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 7000,
+        "breatheMs": 1100,
+        "breatheFrom": -1,
+        "breatheTo": 2
+      }
+    },
+    "sad": {
+      "eyeW": 38,
+      "eyeH": 28,
+      "gazeY": 7,
+      "mouthW": 48,
+      "mouthThickness": 10,
+      "mouthBulge": -9,
+      "motion": {
+        "blinkMs": 6400,
+        "breatheMs": 2400,
+        "breatheFrom": -2,
+        "breatheTo": 4
+      }
+    },
+    "sick": {
+      "eyeW": 50,
+      "eyeH": 8,
+      "rightEyeW": 44,
+      "rightEyeH": 7,
+      "eyeShape": "spiral",
+      "spiralTurns": 2,
+      "gazeY": 4,
+      "mouthW": 30,
+      "mouthThickness": 30,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 2800,
+        "breatheMs": 850,
+        "breatheFrom": -1,
+        "breatheTo": 2,
+        "spinMs": 2400
+      }
+    },
+    "dead": {
+      "eyeW": 38,
+      "eyeH": 6,
+      "mouthW": 0,
+      "mouthThickness": 0,
+      "mouthBulge": 0,
+      "motion": null
+    },
+    "asleep": {
+      "eyeW": 38,
+      "eyeH": 7,
+      "mouthW": 30,
+      "mouthThickness": 8,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 0,
+        "breatheMs": 3400,
+        "breatheFrom": -2,
+        "breatheTo": 4
+      }
+    }
+  }
+}

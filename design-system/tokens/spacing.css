@@ -1,0 +1,27 @@
+/* No scale was ever chosen; these are the numbers that happened, taken from
+   the composables. 18 is the dominant one — it is the screen margin. */
+
+:root {
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-5: 5px;    /* between meter segments */
+  --space-6: 6px;
+  --space-8: 8px;    /* tracked-app rows, chip icon gap */
+  --space-10: 10px;  /* between the two status chips */
+  --space-12: 12px;
+  --space-14: 14px;  /* care card internals, card padding-x */
+  --space-16: 16px;  /* care card padding, transcript gutter */
+  --space-18: 18px;  /* SCREEN MARGIN */
+  --space-20: 20px;
+  --space-24: 24px;
+
+  /* Load-bearing geometry. Moving these changes behaviour, not appearance. */
+  --touch-min: 48px;      /* minimum touch target, everywhere */
+  --sheet-peek: 308px;    /* chat sheet at rest; bounded by the care card above it */
+  --sheet-content: 560px; /* MUST be constant: a sheet's expanded height is its content height */
+  --pet-panel-width: 240px;
+  --pet-panel-height: 200px;  /* the Waveshare rotated: 448x368, not 368x448 */
+  --chip-height: 40px;
+  --meter-segment-height: 9px;
+  --usage-bar-height: 8px;
+}

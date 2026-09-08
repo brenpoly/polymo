@@ -1,0 +1,214 @@
+/* Every value here is from android/app/src/main/kotlin/com/digitalpet/ui/theme/
+   Color.kt and PetColors.kt. Do not invent shades; if nothing fits, the theme
+   is incomplete rather than a literal being needed.
+
+   REGENERATED 2026-08-09, after the contrast debt this system found was fixed.
+   Four things changed and one is new:
+
+     - The LIGHT muted set darkened together, so the three keep their
+       relationship: on-surface-variant #8A8067 -> #736A56, thriving/secondary
+       #4B7A50 -> #48754D, error/critical #C0492F -> #B8462D. All three now
+       clear 4.5:1 on all three light surfaces, at 4.8 / 5.2 / 4.5.
+     - --accent-text is new, and is the gold that can be READ.
+     - --track is new, and is the surface a filled bar is read against.
+
+   NOTE ON PRECEDENCE, changed 2026-08-09. This file used to be a snapshot the
+   code overruled. It is now the other way round: this system is the source of
+   truth, and DESIGN.md is what changes when the two disagree (DESIGN.md §7.2).
+   The one exception is that the code still decides what a number MEANS, because
+   a mock can draw a comparison the simulation does not make.
+
+   That inversion is exactly why this file was regenerated rather than left. A
+   stale authority is worse than an honest snapshot. */
+
+:root {
+  /* --- Brand. Identical in both schemes. --- */
+  --pet-gold: #F5A623;
+  --pet-gold-light: #FFD700;
+  --pet-purple: #7B61FF;
+  --pet-purple-light: #A594FF;
+
+  /* The pet's own panel. A picture of a switched-on AMOLED, so it is NEVER
+     themed — theming it would make the pet change colour when the user
+     changes a phone setting. */
+  --pet-panel-black: #0B0B0B;
+
+  /* --- DARK is the root scheme: the app was dark-only until 2026-08-06. --- */
+  --background: #0D0D12;
+  --surface: #1A1A24;
+  --surface-variant: #22222E;
+  --surface-container-lowest: #110B1A;
+  --surface-container-low: #1D1A26;
+  --surface-container: #211E2A;
+  --surface-container-high: #2C2835;
+  --surface-container-highest: #373340;
+  --surface-dim: #16111D;
+  --surface-bright: #3B3744;
+
+  --primary: var(--pet-gold);
+  --on-primary: #0D0D12;
+  --primary-container: #713800;
+  --on-primary-container: #FFDA9C;
+  --inverse-primary: #8D5000;
+
+  --secondary: var(--pet-purple);
+  --on-secondary: #0D0D12;
+  --secondary-container: #302CC0;
+  --on-secondary-container: #EDD7FF;
+
+  --tertiary: var(--pet-gold-light);
+  --on-tertiary: #0D0D12;
+  --tertiary-container: #5A4500;
+  --on-tertiary-container: #FFE019;
+
+  --on-background: #E8E6F0;
+  --on-surface: #E8E6F0;
+  --on-surface-variant: #E8E6F0;
+
+  --outline: #948EA0;
+  --outline-variant: #494455;
+  --scrim: #03000B;
+  --inverse-surface: #E4E1EB;
+  --inverse-on-surface: #322F37;
+  --surface-tint: var(--pet-gold);
+
+  --error: #FFAFA5;
+  --on-error: #6B000B;
+  --error-container: #960016;
+  --on-error-container: #FFD6CF;
+
+  /* --- PetColors: the eight semantics Material has no role for. ---
+     These are SEMANTICS, not colours. A component asks for "the pet needs
+     attention", never "yellow". Six until 2026-08-09; the last two are below
+     and both exist because Material assumes one `primary` works everywhere. */
+  --thriving: #6FBF73;
+  --needs-attention: #FFC107;
+  --critical: #FF4C4C;
+  /* "We have not been told." Must never read as a value. */
+  --unknown: rgba(232, 230, 240, 0.45);
+  --link-up: #6FBF73;
+  --link-down: #FF4C4C;
+
+  /* The accent when it CARRIES TEXT rather than filling a shape. Dark never had
+     the problem, so it is the brand gold here; see the light block for why the
+     token exists at all. Use it for a label, an icon or a border sitting ON a
+     surface — a gold button stays --primary, because its content is
+     --on-primary and that pairing always passed. */
+  --accent-text: var(--pet-gold);
+
+  /* The surface a FILLED BAR is read against — the meters and the usage bar.
+     Material has no role for this: its own answer is that a progress track is a
+     parameter. The two bars had drifted onto different colours; this is one
+     track for both. Gold on it is 4.62:1. */
+  --track: #494455;
+}
+
+[data-theme="light"] {
+  /* Warm: paper creams rather than white, a brown-black rather than grey text,
+     and a muted green doing the work a saturated accent usually would. */
+  --background: #F7F3E3;
+  --surface: #FFFDF5;
+  --surface-variant: #F3ECD6;
+  --surface-container-lowest: #FFFDF5;
+  --surface-container-low: #F7F3E3;
+  --surface-container: #F3ECD6;
+  --surface-container-high: #EDE6CE;
+  --surface-container-highest: #E6DFC7;
+  --surface-dim: #E0D8BE;
+  --surface-bright: #FFFDF5;
+
+  --primary: var(--pet-gold);
+  /* Gold is a LIGHT colour: its content is the brown-black, never white. */
+  --on-primary: #2A2418;
+  --primary-container: #FFE9C2;
+  --on-primary-container: #3A2A00;
+  --inverse-primary: #FFD700;
+
+  /* Deliberate asymmetry with dark: secondary is GREEN here. Purple appears
+     nowhere in the light design, and forcing it in for symmetry would put a
+     colour on screen the design never uses. */
+  --secondary: #48754D;
+  --on-secondary: #FFFDF5;
+  --secondary-container: #E9F3E6;
+  --on-secondary-container: #223B25;
+
+  --tertiary: var(--pet-gold-light);
+  --on-tertiary: #2A2418;
+  --tertiary-container: #F3ECD6;
+  --on-tertiary-container: #3A3428;
+
+  --on-background: #2A2418;
+  --on-surface: #2A2418;
+
+  /* DARKENED 2026-08-09, from #8A8067, and it is the most consequential change
+     this palette has had — this role carries more of the app's look than
+     --primary does. It measured 3.31–3.84:1 against a 4.5 requirement, the
+     most-used text colour in the light scheme and the furthest under.
+
+     It is a NEW value rather than the #6B6350 that already existed one step
+     down. Reusing that would have collapsed two of the palette's three
+     on-surface tiers into one, which is what would flatten the screen. This
+     sits between the two: the least darkening that clears the bar with the
+     hierarchy intact. 4.81 / 5.25 / 4.53 across the three light surfaces.
+
+     It is less recessive than it was. That is the cost, and it was chosen with
+     the cost known. */
+  --on-surface-variant: #736A56;
+
+  --outline: #C3BAA0;
+  --outline-variant: #DCD5BC;
+  --scrim: #1A1710;
+  --inverse-surface: #2A2418;
+  --inverse-on-surface: #F7F3E3;
+
+  /* Darkened with the rest of the muted set, from #C0492F. It was under on two
+     of three surfaces — 4.46 and 4.20 — near enough to look fine and still a
+     failure, which is why this is computed rather than judged. */
+  --error: #B8462D;
+  --on-error: #FFFFFF;
+  --error-container: #FFDAD3;
+  --on-error-container: #5C1408;
+
+  --thriving: #48754D;
+  --needs-attention: #F5A623;
+  --critical: #B8462D;
+  --unknown: rgba(42, 36, 24, 0.38);
+  --link-up: #48754D;
+  --link-down: #B8462D;
+
+  /* THE GOLD THAT CAN BE READ, and the reason this token exists.
+
+     --primary #F5A623 on the light creams is about 1.9:1 against 4.5:1, so
+     every gold label and gold icon on a light surface was failing — text
+     buttons, outlined buttons, the send and microphone icons, the focused field
+     border, the selected radio.
+
+     The fix is a second gold for FOREGROUNDS, not a darker --primary. Darkening
+     primary is one constant and was rejected: it is the identity colour, and
+     the message bubbles, the meters, the usage-bar fill and the FAB are gold
+     FILLS with dark text on them. They neither need the change nor survive it —
+     --on-primary would have to flip to white and the warm theme would stop
+     being warm.
+
+     This value is this system's own hover gold, not a shade invented for the
+     fix. 5.1:1 on background, 5.6:1 on surface, 4.8:1 on surfaceVariant. */
+  --accent-text: #8A5E0F;
+
+  /* DARK, and that is the fix rather than a mistake.
+
+     Gold on the old cream track measured 1.38:1 on the usage bar and 1.72:1 on
+     a meter, against the 3:1 a non-text indicator wants — fill and track were
+     very nearly the same brightness.
+
+     There is no light track that is both quiet and legible, and the arithmetic
+     is why: gold is itself a light colour, so a track darkening TOWARDS it gets
+     worse before better. The ladder runs 1.38 at the old track, down through
+     about 1.05 at --outline, and only clears 3 on the far side. "Darken it a
+     little" was never available.
+
+     So an empty meter segment now reads as a present dark segment rather than
+     as an absence. That is a real change in how a half-empty meter looks, taken
+     deliberately. The value was already in the palette as the body-copy brown
+     rather than invented here, at 3.74:1. */
+  --track: #5C5342;
+}

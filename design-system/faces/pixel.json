@@ -1,0 +1,141 @@
+{
+  "id": "pixel",
+  "name": "Pixel",
+  "description": "Square eyes and a blocky mouth \u2014 the pet as a handheld from 1998. Proves the shape lever: nothing here changes except eyeRadius, the mouth radii and the palette, and the pet reads as a different device.",
+  "persona": "classic",
+  "colors": {
+    "eye": "#9BE564",
+    "mouth": "#9BE564",
+    "panel": "#0B1400",
+    "control": "#16240A",
+    "text": "#D6F5B8"
+  },
+  "layout": {
+    "eyeOffsetX": 62,
+    "eyeOffsetY": -52,
+    "mouthOffsetY": 44,
+    "eyeRadius": 0,
+    "mouthCap": "square"
+  },
+  "stageScale": {
+    "egg": 55,
+    "child": 70,
+    "teen": 85,
+    "adult": 100
+  },
+  "faces": {
+    "neutral": {
+      "eyeW": 60,
+      "eyeH": 84,
+      "mouthW": 112,
+      "mouthThickness": 16,
+      "mouthBulge": 0
+    },
+    "happy": {
+      "eyeW": 60,
+      "eyeH": 12,
+      "eyeBulge": -14,
+      "gazeY": -3,
+      "mouthW": 144,
+      "mouthThickness": 16,
+      "mouthBulge": 20,
+      "motion": {
+        "blinkMs": 4000,
+        "breatheFrom": -4,
+        "breatheMs": 1400,
+        "breatheTo": 6
+      }
+    },
+    "sleepy": {
+      "eyeW": 60,
+      "eyeH": 14,
+      "gazeY": 5,
+      "mouthW": 52,
+      "mouthThickness": 10,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 9000,
+        "breatheFrom": -3,
+        "breatheMs": 3200,
+        "breatheTo": 5
+      }
+    },
+    "surprised": {
+      "eyeW": 76,
+      "eyeH": 104,
+      "gazeY": -2,
+      "mouthW": 48,
+      "mouthThickness": 48,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 8000,
+        "breatheFrom": -1,
+        "breatheMs": 1200,
+        "breatheTo": 2
+      }
+    },
+    "sad": {
+      "eyeW": 60,
+      "eyeH": 56,
+      "gazeY": 7,
+      "mouthW": 68,
+      "mouthThickness": 12,
+      "mouthBulge": -8,
+      "motion": {
+        "blinkMs": 7000,
+        "breatheFrom": -3,
+        "breatheMs": 2600,
+        "breatheTo": 4
+      }
+    },
+    "sick": {
+      "eyeW": 64,
+      "eyeH": 10,
+      "rightEyeW": 58,
+      "rightEyeH": 9,
+      "eyeShape": "spiral",
+      "spiralTurns": 2,
+      "gazeY": 4,
+      "mouthW": 36,
+      "mouthThickness": 36,
+      "mouthBulge": 0,
+      "mouthCap": "round",
+      "motion": {
+        "blinkMs": 3200,
+        "breatheFrom": -2,
+        "breatheMs": 900,
+        "breatheTo": 3,
+        "spinMs": 2800
+      }
+    },
+    "dead": {
+      "eyeW": 60,
+      "eyeH": 8,
+      "mouthW": 0,
+      "mouthThickness": 0,
+      "mouthBulge": 0,
+      "motion": null
+    },
+    "asleep": {
+      "eyeW": 60,
+      "eyeH": 8,
+      "mouthW": 52,
+      "mouthThickness": 10,
+      "mouthBulge": 0,
+      "motion": {
+        "blinkMs": 0,
+        "breatheFrom": -2,
+        "breatheMs": 3600,
+        "breatheTo": 4
+      }
+    }
+  },
+  "motion": {
+    "blinkMs": 5400,
+    "shutMs": 300,
+    "breatheMs": 1900,
+    "breatheFrom": -4,
+    "breatheTo": 6,
+    "spinMs": 0
+  }
+}

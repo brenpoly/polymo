@@ -1,0 +1,106 @@
+# The user-facing strings this system fixes, in a parseable form.
+#
+# §6 of DESIGN-SYSTEM.md is the same content in prose. This is the half a machine
+# can check: the app's `StringSyncTest` reads a vendored copy of THIS file and
+# asserts the functions that produce these strings still produce exactly them.
+#
+# WHY IT LIVES HERE RATHER THAN IN THE REPO. It used to be a manifest written on
+# the code's side, and that made a weaker guarantee than it looked like: it could
+# only catch the CODE drifting from the MANIFEST, never the manifest drifting
+# from this system. It cost us on 2026-08-09 — the models chip was hand-edited to
+# "Models loaded" in the gallery, and nothing failed, because the manifest and
+# the code still agreed with each other while both disagreed with the design.
+#
+# Now copy works the way colour does: change a string here, pull, the test fails,
+# the code follows.
+#
+# ONLY THE STRINGS THAT CARRY A DECISION are here. The connection labels and the
+# care-card headlines are ORDERED tables and the order is the design — "Your pet
+# is off" outranks "Bluetooth is off" outranks "Connected", because being off is
+# the only one of the three the user chose, and naming the radio instead sends
+# them to hunt a pet they switched off on purpose. A subtitle nobody ranks is not
+# here; a manifest that pinned every string would fail on every typo fix and be
+# deleted inside a month.
+#
+# These strings also appear in the ui_kits/ sources that render them. That is
+# real duplication and it is the lesser evil: the alternative is generating this
+# from the .jsx, which needs a parser that would be wrong the first time somebody
+# writes a template literal.
+#
+# Format: <key> | <exact string>
+
+connection.off             | Your pet is off
+connection.bluetooth-off   | Bluetooth is off
+connection.ready           | Connected
+connection.connecting      | Connecting…
+connection.scanning        | Looking for your pet…
+connection.paired-idle     | Not connected
+connection.never-paired    | No pet paired yet
+
+headline.off               | You switched your pet off. It is living on without you.
+headline.unknown           | Waiting to hear from your pet…
+headline.dead              | Your pet has died.
+headline.sick              | Unwell — too much screen time.
+headline.sick-discreet     | Not feeling well.
+headline.starving-miserable| Starving and miserable. It needs you now.
+headline.starving          | Starving. Feed it — double tap.
+headline.miserable         | Miserable. Play with it — shake for a second.
+headline.calling           | Asking for attention.
+headline.low               | Could use some attention.
+headline.well              | Doing well.
+
+readiness.loading          | Waking up…
+readiness.none             | Your pet has no models yet.
+readiness.one-missing      | Your pet cannot hear you.
+readiness.two-missing      | Your pet cannot hear you or speak.
+
+appearance.system          | Use system setting
+appearance.light           | Light
+appearance.dark            | Dark
+
+# The models chip. It read "Models" — a NOUN where its neighbour is a STATE,
+# "Connected" beside "Models" — and that asymmetry was mirrored rather than
+# smoothed over, on the grounds that copy is the design system's call.
+#
+# CHANGED IN THE DESIGN SYSTEM 2026-08-09, which is the process working: the
+# noun became a state there first and the code followed. Both chips now report a
+# condition rather than one naming a thing.
+chip.models-ready          | Models loaded
+chip.models-missing        | Models missing
+
+# FIRST RUN — DESIGN.md 5.2. The five steps, and the way out of each.
+#
+# THE SECONDARY LABEL IS THE RULE MADE VISIBLE, which is why it is pinned. Steps
+# 2 and 3 BLOCK — there is no version of the product without a pet or without
+# models — so declining ends the run and the word says so. Steps 4 and 5 DEGRADE:
+# one named thing stops, the step comes back, and "Not now" is honest. Swapping
+# the two wordings would be a lie about what the button does.
+#
+# The welcome has no way out at all: there is nothing to decline about being told
+# what the product is, and a "skip" there invites the reader to miss the one
+# expectation the app cannot recover from them not having.
+
+firstrun.title.welcome       | Your pet is a real thing.
+firstrun.title.pet           | Find your pet.
+firstrun.title.models        | Give it a brain, ears and a voice.
+firstrun.title.screentime    | Decide what makes it ill.
+firstrun.title.notifications | Let it get a word in.
+
+firstrun.action.welcome       | Set up my pet
+firstrun.action.pet           | Pair a pet
+firstrun.action.models        | Add models
+firstrun.action.screentime    | Choose apps
+firstrun.action.notifications | Allow
+
+firstrun.secondary.blocking | I'll finish setting up later
+firstrun.secondary.optional | Not now
+
+firstrun.cost.screentime    | Your pet will not be able to fall ill.
+firstrun.cost.notifications | You will only hear from it in the app.
+
+# SCREEN TIME. The row's reading has meant four different things — the day's
+# total, the live sitting, the longest session today, and now the most recent
+# session. Every one of them rendered as a bare `n / m min`, so nothing on the
+# row ever said WHICH. The label is the fix, and it is pinned because a reading
+# that changes meaning silently is what cost the three revisions.
+screentime.session-label | Last session:

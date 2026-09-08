@@ -1,0 +1,102 @@
+# DigitalPet — ESP32-S3-Touch-AMOLED-1.8 (ESP32-S3R8: 8MB octal PSRAM, 16MB flash)
+CONFIG_IDF_TARGET_ESP32S3=y
+
+# Flash
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+
+# Custom partition table: 2x 3MB OTA app slots + a ~9.8MB assets partition.
+# (The default single-app table capped the app at 1MB — already 83% full — and
+# wasted ~14MB of the 16MB chip.) See partitions.csv.
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# Octal PSRAM (R8) — needed for the AMOLED/LVGL framebuffers
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+
+# Performance
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+
+# Power management — DFS only, light sleep deliberately NOT enabled yet.
+#
+# The S3 was pinned at 240 MHz from M1 until 2026-08-02 with no scaling and no
+# sleep of any kind, which is most of why the board did not survive a night on
+# battery. With CONFIG_PM_ENABLE the idle task can drop the CPU to the minimum
+# frequency whenever nothing holds a performance lock, and since the pet now
+# stops animating when it sleeps there are finally long stretches where nothing
+# does. Before that change LVGL repainted forever and this would have bought
+# nothing.
+#
+# Tickless idle is what makes the drop worth having: without it the scheduler
+# wakes every FreeRTOS tick regardless and the CPU never idles long enough to
+# matter.
+#
+# LIGHT SLEEP IS A SEPARATE, RISKIER STEP and is off here on purpose. It stops
+# peripherals, and this project has two subsystems that will not tolerate that
+# quietly — the BLE link (whose timing the audio pacing already depends on) and
+# the I2S DMA, whose starvation failures look like a broken button rather than
+# a power setting. Measure DFS first.
+CONFIG_PM_ENABLE=y
+CONFIG_FREERTOS_USE_TICKLESS_IDLE=y
+
+# LIGHT SLEEP WAS TRIED ON 2026-08-02 AND DOES NOT WORK ON THIS BOARD.
+# The BLE controller config is deliberately left at its defaults; do not add
+# BT_CTRL_LPCLK_SEL_RTC_SLOW back without new hardware.
+#
+# What happened: with -DPET_LIGHT_SLEEP=1 and the controller keeping connection
+# timing from the RTC slow clock, the link dropped every few seconds with
+# `disconnected (status=8)` — GATT_CONN_TIMEOUT, a supervision timeout, meaning
+# connection events were being MISSED rather than refused. Every reconnect
+# succeeded immediately and negotiated v7 cleanly, which rules out pairing, the
+# GATT table and the protocol, and leaves timing.
+#
+# The cause is the clock. RTC_SLOW on this board is CONFIG_RTC_CLK_SRC_INT_RC —
+# the internal RC oscillator — because no external 32.768 kHz crystal is fitted.
+# It drifts with temperature, the peripheral misses its receive windows, and the
+# central gives up. A hardware conclusion rather than a tuning one:
+#
+#   MAIN_XTAL     accurate, but keeps the main crystal running, which prevents
+#                 light sleep entirely — it defeats the purpose
+#   EXT_32K_XTAL  the right answer, and needs a crystal this board lacks
+#
+# Raising the supervision timeout or adding slave latency would hide the symptom
+# without fixing the drift, at the cost of noticing real disconnects later.
+#
+# The PET_LIGHT_SLEEP flag is kept so the experiment can be repeated on hardware
+# that has the crystal. It stays 0.
+
+# Bigger main task stack for LVGL UI building
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# BLE — NimBLE host (peripheral). Lighter than Bluedroid, BLE-only.
+CONFIG_BT_ENABLED=y
+CONFIG_BT_NIMBLE_ENABLED=y
+
+# Persist bonds in NVS. Without this NimBLE keeps pairing keys in RAM only, so
+# every reboot/reflash orphans the phone's saved bond — the phone then reports
+# "bond-loss reason: 3" and encryption fails on reconnect. This is the same
+# device-forgets/phone-remembers asymmetry that produced the bogus "incorrect
+# PIN or passkey" errors on the earlier nRF54 build; don't repeat it here.
+CONFIG_BT_NIMBLE_NVS_PERSIST=y
+
+# Quieten NimBLE. At INFO it logs two lines per GATT notification, and the mic
+# uplink sends 50 a second — 100 log lines/s that flood the serial capture the
+# audio itself is being debugged from, and cost UART bandwidth to emit.
+CONFIG_BT_NIMBLE_LOG_LEVEL_WARNING=y
+
+# DO NOT SET CONFIG_RTC_CLK_SRC_EXT_CRYS ON THIS BOARD. Tried on 2026-08-02 to
+# find out whether a 32.768 kHz crystal is fitted; it BOOT-LOOPS. Nine
+# rst:0xc (RTC_SW_CPU_RST) in a row, continuous "I2C transaction timeout", and a
+# screen flashing white and black as the display re-initialised on every reboot.
+#
+# ESP-IDF is documented as falling back to the internal RC when the crystal is
+# missing. On this board it does not fall back cleanly: the RTC slow clock
+# calibration never completes, and everything timed off it — I2C, the watchdogs —
+# fails, which takes the chip down before app_main can report anything.
+#
+# THE CRASH IS THE ANSWER. There is no external 32.768 kHz crystal here, which
+# confirms the light-sleep finding above rather than overturning it. Recovery is
+# reflashing without this line; the ROM bootloader is unaffected.

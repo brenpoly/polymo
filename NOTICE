@@ -1,0 +1,75 @@
+PolyMO
+Copyright 2026 Brendan Polley
+
+This product includes software developed for the PolyMO project.
+
+--------------------------------------------------------------------------
+Three layers
+--------------------------------------------------------------------------
+
+  pet-esp32/                       Apache-2.0   ESP32-S3 firmware. Links
+                                                nothing copyleft.
+  android/, design-system/,        Apache-2.0   PolyMO's own source. Reusable
+  tools/, shared/                               under Apache terms on its own.
+  A released Android APK           GPL-3.0      Links espeak-ng; the combined
+                                                binary inherits the GPL.
+
+Full texts: LICENSE (Apache-2.0) and licences/GPL-3.0.txt (GPL-3.0).
+
+--------------------------------------------------------------------------
+Why a released APK is GPL-3.0
+--------------------------------------------------------------------------
+
+The app's native library (libdigitalpet-native.so) links espeak-ng, which is
+licensed GPL-3.0-or-later, and the app bundles espeak-ng's phoneme data under
+android/app/src/main/assets/espeak-ng-data/. espeak-ng is used by Piper for
+text-to-phoneme conversion; the pet cannot speak without it.
+
+Apache-2.0 is one-way compatible with the GPL: Apache-2.0 code may be combined
+into a GPL-3.0 work, and the result is GPL-3.0. Consequently ANY BINARY THAT
+LINKS espeak-ng -- including a released APK -- must be distributed under
+GPL-3.0, with the corresponding source and licence text made available to
+recipients.
+
+The obligation attaches to linking, not to calling. Piper does provide a
+non-espeak phonemizer (PhonemeType::TextPhonemes), but choosing it changes
+nothing while espeak-ng remains in the link, and nearly every published Piper
+voice is an espeak-phoneme model.
+
+The ESP32-S3 firmware is unaffected. It never links espeak-ng; the audio it
+plays arrives over BLE already synthesised.
+
+PolyMO's own source files remain Apache-2.0 and may be reused under those
+terms independently of the combined binary.
+
+This is a statement of the licences involved, not legal advice.
+
+--------------------------------------------------------------------------
+Third-party components
+--------------------------------------------------------------------------
+
+Linked into the Android native library:
+
+  espeak-ng          GPL-3.0-or-later   https://github.com/espeak-ng/espeak-ng
+                     (text: licences/GPL-3.0.txt)
+  llama.cpp          MIT                https://github.com/ggerganov/llama.cpp
+  whisper.cpp        MIT                https://github.com/ggerganov/whisper.cpp
+  Piper              MIT                https://github.com/rhasspy/piper
+  piper-phonemize    MIT                https://github.com/rhasspy/piper-phonemize
+  Opus               BSD-3-Clause       https://opus-codec.org
+  ONNX Runtime       MIT                https://github.com/microsoft/onnxruntime
+
+Used by the ESP32-S3 firmware:
+
+  ESP-IDF            Apache-2.0         https://github.com/espressif/esp-idf
+  LVGL               MIT                https://github.com/lvgl/lvgl
+  Waveshare BSP      MIT                esp32_s3_touch_amoled_1_8
+
+Bundled fonts (full texts in licences/):
+
+  Baloo 2            SIL OFL 1.1        licences/OFL-Baloo2.txt
+  Quicksand          SIL OFL 1.1        licences/OFL-Quicksand.txt
+
+No machine-learning models are bundled. The language model, the Whisper
+speech-recognition model and the Piper voice are supplied by the user and
+carry their own licences.

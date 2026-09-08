@@ -1,0 +1,34 @@
+{
+  "project": "",
+  "pushedAt": "2026-08-27T21:39:08+00:00",
+  "note": "sha256 of each file AS PUSHED. Written by tools/design-remote.py --record, immediately after a DesignSync push. It records what we sent, not what the project now holds.",
+  "localOnly": [
+    ".design-push.json",
+    "README.md"
+  ],
+  "pushed": {
+    "components/pet/faceSets.jsx": "e1fdc438ef416ed7fa9fb0e4597e14dfbbe9d45b9dc0466ec8d920b5cb4ae244",
+    "components.txt": "5f6def452270b5498201fb7cd9dc75fd268616d3b21c4ecf06527904c6348637",
+    "faces/README.md": "a7c3c8bebae4c74945fd234aad7f49970999fba8becd15f551739142a4057803",
+    "faces/bloom.json": "f172f409d502cf6e0220fff732d4f428eefecc285b7d931db6dde92e867b2938",
+    "faces/bmo.json": "9538236d806b1cbd6592d76129a06ee3ea5bc18912ad43763f7ea0794409b258",
+    "faces/classic.json": "b17b8964a1b52b1d20c4da0b6546dd25d60adb1555eac53d00dc237941dc96be",
+    "faces/pixel.json": "057c670a93b7f49f98b26e52a43ed6e722a0cca9c9f32055d62e779d460cc4d4",
+    "faces/preview/bloom.card.html": "4f1835018a53a6f964d8f188492af42724ff8b75284924fbfa144c1d2de46422",
+    "faces/preview/bmo.card.html": "5f4b83d55f46506f30ec6a70910a17b14925d6e32ebefa5526270f039cc62b61",
+    "faces/preview/classic.card.html": "860cdacb1bfda6f9650c1dddc83aababa3dbee20d29b07f0d4f8dd1239499bd7",
+    "faces/preview/pixel.card.html": "022f1dbee956b383b3f6dbe22e35af93aae4a5c5f983b69d4eb954858fb660f6",
+    "guidelines/brand-pet-face.html": "9da390cf3affff99929e9f447ddf40ce527ed8930c4b5390a2959d0d7dd50445",
+    "guidelines/brand-pet-voice.html": "52dc477d28a8664e72ebfb394e978be8cc3dd3951e14149be60a1f38cff4fbdd",
+    "guidelines/colors-pet.html": "82ad253b906e6d194461f986f6b5c06267a3b99cd7e0477b9e2084243eaf920b",
+    "guidelines/motion.html": "7de0d69f2e5fa6d85545bb75777aab5f1cae35892598afbd63f12e1c03b0bf48",
+    "personas/README.md": "5e076e44a04d447cec75a2fd04aa6bf8d70f6c9fb485f46499c84683d0d24ca5",
+    "personas/bmo.json": "37b6989d95d74099bf6571d750ceebacff2a9ab560ea2e16d006c17921b44ab2",
+    "personas/classic.json": "9aa258b58efa97e790a26ee4cb497f85ec585ea95ddd92693dafb4cc7472391e",
+    "strings.txt": "1f2368f4b15b0d896a95ceeb3c4ca10347fa70f5cb62bf5fdd873ef8f9c335b5",
+    "tokens/colors.css": "899770641974c5433a3a551dc9f7ff57eaf6c14dc1f64c29ab1583aa46bfdc63",
+    "tokens/shape.css": "a499ce0ba471aa2c99e405bd595c9de5a86b58538e986c0fc7df36efa6c1e660",
+    "tokens/spacing.css": "05562bb7986f3f0bfd549cae4a40797662568167662313d71597f6f2b251ad1b",
+    "tokens/typography.css": "941854986c8a4724ed9ba9c3744afb567fba3e578c0fe0ce35f2b6eeaa3bdd0f"
+  }
+}
