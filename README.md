@@ -102,6 +102,7 @@ android/        the app — BLE, Whisper, llama.cpp, Piper, screen-time tracking
 design-system/  design tokens, plus the pet's faces and personas (source of truth)
 tools/          generators that turn faces and personas into firmware and app code
 shared/         the wire protocol header shared by both sides
+hardware/       printable enclosures (STL) — the shells shown in the video
 licences/       full texts for the bundled fonts and for GPL-3.0
 DESIGN.md       product and UX decisions, cited from the source by section
 CLAUDE.md       build commands, conventions, and the traps worth knowing
