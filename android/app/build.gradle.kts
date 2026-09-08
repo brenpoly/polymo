@@ -15,10 +15,15 @@ plugins {
  * values. Create the key yourself — the password is yours and must not pass
  * through anything that gets committed, logged or shared:
  *
- *     keytool -genkeypair -v -keystore digitalpet-release.jks \
+ *     # The keystore lives in android/app/, beside this file — storeFile below
+ *     # is a bare filename and gets "app/" prefixed to it.
+ *     keytool -genkeypair -v -keystore android/app/digitalpet-release.jks \
  *             -alias digitalpet -keyalg RSA -keysize 4096 -validity 10000
  *
- *     # android/keystore.properties
+ *     # android/app/keystore.properties — NOT android/, which is where an
+ *     # earlier version of this comment sent people. A properties file in the
+ *     # wrong place is not an error (see MISSING IS NOT AN ERROR below), so the
+ *     # build comes out UNSIGNED and looks exactly like one that worked.
  *     storeFile=digitalpet-release.jks
  *     storePassword=...
  *     keyAlias=digitalpet
